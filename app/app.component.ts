@@ -1,7 +1,13 @@
 import {Component} from 'angular2/core';
 
+
+
 @Component({
-	selector: 'my-app',
-	template: '<h1>My First Angular 2 Starter App</h1>'
+    selector: 'my-app',
+    template: `
+    <h3>{{contact.lastName}}</h3>
+    `
 })
-export class AppComponent{}
+export class AppComponent {
+    public contact = { firstName: 'John', lastName: 'Lundgren', phone: '0700490691', email: 'borracho@hotmail.com' };
+}
