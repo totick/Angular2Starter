@@ -16,14 +16,20 @@ System.register(['angular2/core'], function(exports_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
+            //Decorator to add configuration to a class
             AppComponent = (function () {
                 function AppComponent() {
                     this.contact = { firstName: 'John', lastName: 'Lundgren', phone: '0700490691', email: 'borracho@hotmail.com' };
+                    this.showDetail = false;
                 }
+                AppComponent.prototype.onSelect = function () {
+                    this.showDetail = true;
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n    <h3>{{contact.lastName}}</h3>\n    "
+                        template: "\n    <h3 (click)=\"onSelect()\" [class.redText]=\"showDetail === true\">{{contact.firstName}} {{contact.lastName}}</h3>\n    <input [(ngModel)]=\"contact.firstName\" type=\"text\">\n    <div *ngIf=\"showDetail === true\">\n        Phone number: {{contact.phone}}<br>\n        Email: {{contact.email}}\n    </div>\n    ",
+                        styleUrls: ["../resources/app.css"]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AppComponent);
