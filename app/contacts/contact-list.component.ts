@@ -14,7 +14,7 @@ import {Contact} from "./contact";
     `,
     directives: [ContactComponent],
     providers: [ContactService],
-    styleUrls: ["../../resources/app.css"]
+    styleUrls: ["../../resources/contact-list.css"]
 })
 
 export class ContactListComponent implements OnInit {

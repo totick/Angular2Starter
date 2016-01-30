@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>Angular 2 test</title>
+    <link href="resources/app.css" rel="stylesheet" type="text/css">
     
 	<script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
 	<script src="node_modules/systemjs/dist/system.src.js"></script>
@@ -19,7 +20,7 @@
 		System.import('app/boot').then(null, console.error.bind(console));
 	</script>
 </head>
-<body>
+<body class="main">
     <!-- Tag configured as a selector -->
 	<my-app></my-app>
 </body>

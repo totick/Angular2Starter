@@ -44,7 +44,7 @@ System.register(["angular2/core", "./contact.component", "./contact.service"], f
                         template: "\n    <ul>\n        <li *ngFor=\"#contact of contacts\" (click)=\"onSelect(contact)\" [class.redText]=\"contact === selectedContact\">{{contact.firstName}} {{contact.lastName}}</li>\n    </ul>\n    <contact [contact]=\"selectedContact\"></contact>\n    ",
                         directives: [contact_component_1.ContactComponent],
                         providers: [contact_service_1.ContactService],
-                        styleUrls: ["../../resources/app.css"]
+                        styleUrls: ["../../resources/contact-list.css"]
                     }), 
                     __metadata('design:paramtypes', [contact_service_1.ContactService])
                 ], ContactListComponent);
