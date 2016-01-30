@@ -1,5 +1,8 @@
 import {Component} from "angular2/core";
+import {OnInit} from "angular2/core";
 import {ContactComponent} from "./contact.component";
+import {ContactService} from "./contact.service";
+import {Contact} from "./contact";
 
 @Component({
     selector: 'contact-list',
@@ -10,21 +13,28 @@ import {ContactComponent} from "./contact.component";
     <contact [contact]="selectedContact"></contact>
     `,
     directives: [ContactComponent],
+    providers: [ContactService],
     styleUrls: ["../../resources/app.css"]
 })
 
-export class ContactListComponent {
+export class ContactListComponent implements OnInit {
     
     public selectedContact = {};
     
-    public contacts = [
-        { firstName: 'John', lastName: 'Lundgren', phone: '0700490691', email: 'borracho@hotmail.com' },
-        { firstName: 'Kalle', lastName: 'Anka', phone: '01231230691', email: 'perdido@hotmail.com' },
-        { firstName: 'Alexander', lastName: 'Lukas', phone: '465545640', email: 'vagabundo@hotmail.com' },
-        { firstName: 'Joakim', lastName: 'von anka', phone: '78946546', email: 'whatever@hotmail.com' }
-    ];
+    public contacts: Contact [];
+    
+    //Shortcut for assigning an attribute in the constructor e.g this._contactService = _contactService
+    constructor(private _contactService: ContactService){}
     
     onSelect(contact) {
         this.selectedContact = contact;
+    }
+    
+    getContacts(){
+        this._contactService.getContacts().then((contacts: Contact[]) => this.contacts = contacts);
+    }
+    
+    ngOnInit():any{
+        this.getContacts();
     }
 }

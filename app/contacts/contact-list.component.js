@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./contact.component"], function(exports_1) {
+System.register(["angular2/core", "./contact.component", "./contact.service"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(["angular2/core", "./contact.component"], function(exports_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, contact_component_1;
+    var core_1, contact_component_1, contact_service_1;
     var ContactListComponent;
     return {
         setters:[
@@ -17,29 +17,36 @@ System.register(["angular2/core", "./contact.component"], function(exports_1) {
             },
             function (contact_component_1_1) {
                 contact_component_1 = contact_component_1_1;
+            },
+            function (contact_service_1_1) {
+                contact_service_1 = contact_service_1_1;
             }],
         execute: function() {
             ContactListComponent = (function () {
-                function ContactListComponent() {
+                //Shortcut for assigning an attribute in the constructor e.g this._contactService = _contactService
+                function ContactListComponent(_contactService) {
+                    this._contactService = _contactService;
                     this.selectedContact = {};
-                    this.contacts = [
-                        { firstName: 'John', lastName: 'Lundgren', phone: '0700490691', email: 'borracho@hotmail.com' },
-                        { firstName: 'Kalle', lastName: 'Anka', phone: '01231230691', email: 'perdido@hotmail.com' },
-                        { firstName: 'Alexander', lastName: 'Lukas', phone: '465545640', email: 'vagabundo@hotmail.com' },
-                        { firstName: 'Joakim', lastName: 'von anka', phone: '78946546', email: 'whatever@hotmail.com' }
-                    ];
                 }
                 ContactListComponent.prototype.onSelect = function (contact) {
                     this.selectedContact = contact;
+                };
+                ContactListComponent.prototype.getContacts = function () {
+                    var _this = this;
+                    this._contactService.getContacts().then(function (contacts) { return _this.contacts = contacts; });
+                };
+                ContactListComponent.prototype.ngOnInit = function () {
+                    this.getContacts();
                 };
                 ContactListComponent = __decorate([
                     core_1.Component({
                         selector: 'contact-list',
                         template: "\n    <ul>\n        <li *ngFor=\"#contact of contacts\" (click)=\"onSelect(contact)\" [class.redText]=\"contact === selectedContact\">{{contact.firstName}} {{contact.lastName}}</li>\n    </ul>\n    <contact [contact]=\"selectedContact\"></contact>\n    ",
                         directives: [contact_component_1.ContactComponent],
+                        providers: [contact_service_1.ContactService],
                         styleUrls: ["../../resources/app.css"]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [contact_service_1.ContactService])
                 ], ContactListComponent);
                 return ContactListComponent;
             })();
