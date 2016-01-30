@@ -23,7 +23,7 @@ System.register(["angular2/core"], function(exports_1) {
                 ContactComponent = __decorate([
                     core_1.Component({
                         selector: 'contact',
-                        template: "\n    <input [(ngModel)]=\"contact.firstName\" type=\"text\">\n    <div>\n        Phone: {{contact.phone}}<br>\n        Email: {{contact.email}}<br>\n    </div>    \n    ",
+                        template: "\n    <div>\n        First name: <input [(ngModel)]=\"contact.firstName\" type=\"text\"><br>\n        Last name: <input [(ngModel)]=\"contact.lastName\" type=\"text\"><br>\n        Phone: <input [(ngModel)]=\"contact.phone\" type=\"text\"><br>\n        Email: <input [(ngModel)]=\"contact.email\" type=\"text\"><br>\n    </div>\n    ",
                         inputs: ["contact"]
                     }), 
                     __metadata('design:paramtypes', [])
