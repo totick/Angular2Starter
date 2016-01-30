@@ -1,4 +1,4 @@
-System.register(['angular2/core', "./contacts/contact-list.component"], function(exports_1) {
+System.register(["angular2/core"], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,33 +8,30 @@ System.register(['angular2/core', "./contacts/contact-list.component"], function
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, contact_list_component_1;
-    var AppComponent;
+    var core_1;
+    var ContactComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (contact_list_component_1_1) {
-                contact_list_component_1 = contact_list_component_1_1;
             }],
         execute: function() {
-            //Decorator to add configuration to a class
-            AppComponent = (function () {
-                function AppComponent() {
+            ContactComponent = (function () {
+                function ContactComponent() {
+                    this.contact = {};
                 }
-                AppComponent = __decorate([
+                ContactComponent = __decorate([
                     core_1.Component({
-                        selector: 'my-app',
-                        template: "\n    <contact-list></contact-list>\n    ",
-                        directives: [contact_list_component_1.ContactListComponent]
+                        selector: 'contact',
+                        template: "\n    <input [(ngModel)]=\"contact.firstName\" type=\"text\">\n    <div>\n        Phone: {{contact.phone}}<br>\n        Email: {{contact.email}}<br>\n    </div>    \n    ",
+                        inputs: ["contact"]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], ContactComponent);
+                return ContactComponent;
             })();
-            exports_1("AppComponent", AppComponent);
+            exports_1("ContactComponent", ContactComponent);
         }
     }
 });
-//# sourceMappingURL=app.component.js.map
+//# sourceMappingURL=contact.component.js.map
