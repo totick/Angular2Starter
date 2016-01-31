@@ -3,10 +3,16 @@
 	<title>Angular 2 test</title>
     <link href="resources/app.css" rel="stylesheet" type="text/css">
     
-	<script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
 	<script src="node_modules/systemjs/dist/system.src.js"></script>
 	<script src="node_modules/rxjs/bundles/Rx.js"></script>
 	<script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <!-- Need this for routing -->
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <!-- 
+        This script tag must be below the system.src.js script tag otherwise routing does not work. It gives an EXCEPTION: No provider for Router! 
+        Tag for es6-shim.js must also be after system.src.js script tag
+    --> 
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
 	
 	<script>
 		System.config({
@@ -20,7 +26,11 @@
 		System.import('app/boot').then(null, console.error.bind(console));
 	</script>
 </head>
-<body class="main">
+
+<!-- base tag is important for urls and routing to work well in Angular2 -->
+<base href="/">
+
+<body>
     <!-- Tag configured as a selector -->
 	<my-app></my-app>
 </body>
