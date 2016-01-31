@@ -10,7 +10,7 @@ import {Contact} from "./contact";
     <ul>
         <li *ngFor="#contact of contacts" (click)="onSelect(contact)" [class.redText]="contact === selectedContact">{{contact.firstName}} {{contact.lastName}}</li>
     </ul>
-    <contact [contact]="selectedContact"></contact>
+    <contact *ngIf="selectedContact !== null" [contact]="selectedContact"></contact>
     `,
     directives: [ContactComponent],
     providers: [ContactService],
@@ -19,7 +19,7 @@ import {Contact} from "./contact";
 
 export class ContactListComponent implements OnInit {
     
-    public selectedContact = {};
+    public selectedContact = null;
     
     public contacts: Contact [];
     

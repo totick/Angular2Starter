@@ -24,21 +24,26 @@ System.register(["angular2/core", "./contact.service", "angular2/router"], funct
         execute: function() {
             NewContactComponent = (function () {
                 //The Router does not need to be added to the providers list because it is generated in the boot.ts file
-                function NewContactComponent(_contactService, _router) {
+                function NewContactComponent(_contactService, _router, _routeParams) {
                     this._contactService = _contactService;
                     this._router = _router;
+                    this._routeParams = _routeParams;
+                    this.passedLastName = "";
                 }
                 NewContactComponent.prototype.onAddContact = function (firstName, lastName, phone, email) {
                     this.newContact = { firstName: firstName, lastName: lastName, phone: phone, email: email };
                     this._contactService.insertContact(this.newContact);
                     this._router.navigate(['Contacts']);
                 };
+                NewContactComponent.prototype.ngOnInit = function () {
+                    this.passedLastName = this._routeParams.get('lastName');
+                };
                 NewContactComponent = __decorate([
                     core_1.Component({
-                        template: "\n     <div>\n        First name: <input type=\"text\" #firstName><br>\n        Last name: <input type=\"text\" #lastName><br>\n        Phone: <input type=\"text\" #phone><br>\n        Email: <input type=\"text\" #email><br>\n        <button (click)=\"onAddContact(firstName.value, lastName.value, phone.value, email.value)\">Create Contact</button>\n    </div>\n    ",
+                        template: "\n     <div>\n        First name: <input type=\"text\" #firstName><br>\n        Last name: <input type=\"text\" #lastName value=\"{{passedLastName}}\"><br>\n        Phone: <input type=\"text\" #phone><br>\n        Email: <input type=\"text\" #email><br>\n        <button (click)=\"onAddContact(firstName.value, lastName.value, phone.value, email.value)\">Create Contact</button>\n    </div>\n    ",
                         providers: [contact_service_1.ContactService]
                     }), 
-                    __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.Router])
+                    __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.Router, router_1.RouteParams])
                 ], NewContactComponent);
                 return NewContactComponent;
             })();

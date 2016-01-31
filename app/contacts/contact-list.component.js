@@ -26,7 +26,7 @@ System.register(["angular2/core", "./contact.component", "./contact.service"], f
                 //Shortcut for assigning an attribute in the constructor e.g this._contactService = _contactService
                 function ContactListComponent(_contactService) {
                     this._contactService = _contactService;
-                    this.selectedContact = {};
+                    this.selectedContact = null;
                 }
                 ContactListComponent.prototype.onSelect = function (contact) {
                     this.selectedContact = contact;
@@ -41,7 +41,7 @@ System.register(["angular2/core", "./contact.component", "./contact.service"], f
                 ContactListComponent = __decorate([
                     core_1.Component({
                         selector: 'contact-list',
-                        template: "\n    <ul>\n        <li *ngFor=\"#contact of contacts\" (click)=\"onSelect(contact)\" [class.redText]=\"contact === selectedContact\">{{contact.firstName}} {{contact.lastName}}</li>\n    </ul>\n    <contact [contact]=\"selectedContact\"></contact>\n    ",
+                        template: "\n    <ul>\n        <li *ngFor=\"#contact of contacts\" (click)=\"onSelect(contact)\" [class.redText]=\"contact === selectedContact\">{{contact.firstName}} {{contact.lastName}}</li>\n    </ul>\n    <contact *ngIf=\"selectedContact !== null\" [contact]=\"selectedContact\"></contact>\n    ",
                         directives: [contact_component_1.ContactComponent],
                         providers: [contact_service_1.ContactService],
                         styleUrls: ["../../resources/contact-list.css"]
