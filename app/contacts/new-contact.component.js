@@ -28,19 +28,23 @@ System.register(["angular2/core", "./contact.service", "angular2/router"], funct
                     this._contactService = _contactService;
                     this._router = _router;
                     this._routeParams = _routeParams;
-                    this.passedLastName = "";
                 }
-                NewContactComponent.prototype.onAddContact = function (firstName, lastName, phone, email) {
-                    this.newContact = { firstName: firstName, lastName: lastName, phone: phone, email: email };
+                NewContactComponent.prototype.onSubmit = function () {
                     this._contactService.insertContact(this.newContact);
                     this._router.navigate(['Contacts']);
                 };
                 NewContactComponent.prototype.ngOnInit = function () {
-                    this.passedLastName = this._routeParams.get('lastName');
+                    this.newContact = {
+                        firstName: '',
+                        lastName: this._routeParams.get('lastName'),
+                        email: '',
+                        phone: ''
+                    };
                 };
                 NewContactComponent = __decorate([
                     core_1.Component({
-                        template: "\n     <div>\n        First name: <input type=\"text\" #firstName><br>\n        Last name: <input type=\"text\" #lastName value=\"{{passedLastName}}\"><br>\n        Phone: <input type=\"text\" #phone><br>\n        Email: <input type=\"text\" #email><br>\n        <button (click)=\"onAddContact(firstName.value, lastName.value, phone.value, email.value)\">Create Contact</button>\n    </div>\n    ",
+                        template: "\n     <form #myForm=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n        <div>\n            <label>First name:</label>\n            <input type=\"text\" required ngControl=\"firstName\" [(ngModel)]=\"newContact.firstName\" #firstName=\"ngForm\">\n            <span *ngIf=\"!firstName.valid\">Not valid</span>\n        </div>\n        <div>\n            <label>Last name:</label>\n            <input type=\"text\" required ngControl=\"lastName\" [(ngModel)]=\"newContact.lastName\" #lastName=\"ngForm\">\n            <span *ngIf=\"!lastName.valid\">Not valid</span>\n        </div>\n        <div>\n            <label>Phone:</label>\n            <input type=\"text\" required ngControl=\"phone\" [(ngModel)]=\"newContact.phone\" #phone=\"ngForm\">\n            <span *ngIf=\"!phone.valid\">Not valid</span>\n        </div>\n        <div>\n            <label>Email:</label>\n            <input type=\"text\" required ngControl=\"email\" [(ngModel)]=\"newContact.email\" #email=\"ngForm\">\n            <span *ngIf=\"!email.valid\">Not valid</span>\n        </div>\n        <button type=\"submit\" [disabled]=\"!myForm.form.valid\">Create Contact</button>\n    </form>\n    ",
+                        styles: ["\n        .ng-invalid{\n            border:1px solid red;\n        }\n        form div span{\n            color: red;\n        }\n    "],
                         providers: [contact_service_1.ContactService]
                     }), 
                     __metadata('design:paramtypes', [contact_service_1.ContactService, router_1.Router, router_1.RouteParams])
